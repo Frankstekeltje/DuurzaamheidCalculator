@@ -13,6 +13,7 @@
     <script src="/js/p5.js"></script>
     <script src="/js/p5.sound.js"></script>
 
+    <script src="/js/Models/House.js"></script>
     <script src="/js/Models/Room.js"></script>
     <script src="/js/Models/Wall.js"></script>
 

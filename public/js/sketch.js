@@ -1,13 +1,14 @@
 var shapeStartX, shapeStartY;
 var tempShapeX, tempShapeY, tempShapeW, tempShapeH = null;
-var rooms = [];
-var selected = [];
+var house;
+var selected, rooms = [];
 
 function setup() {
     createCanvas(windowWidth / 1.5, windowHeight - 50);
 
     radio = createRadio();
-    radio.option('room');
+    radio.option('house');
+    radio.option('wall')
     radio.option('select');
     radio.style('height', '60px');
 
@@ -16,6 +17,8 @@ function setup() {
 
 function draw() {
     background(0);
+
+    (house != null) ? house.show() : null;
 
     for(var i = 0; i < rooms.length; i++){
         rooms[i].show();
@@ -30,23 +33,28 @@ function draw() {
 }
 
 function mousePressed(){
-    if(radio.value() == 'room'){
+    if(radio.value() == 'house'){
         shapeStartX = mouseX;
         shapeStartY = mouseY;
     }
 }
 
 function mouseClicked(){
-    console.log(rooms.length);
     if(radio.value() == 'select'){
-        for(var i = 0; i < rooms.length; i++){
-            rooms[i].roomSelected(mouseX, mouseY);
-        }
+        house.houseSelected();
+    }else if(radio.value() == 'wall'){
+        house.wallSelected();
+    }
+}
+
+function mouseMoved(){
+    if(radio.value() == 'wall'){
+        house.wallHover();
     }
 }
 
 function mouseDragged(){
-    if(radio.value() == 'room'){
+    if(radio.value() == 'house'){
         tempShapeX= Math.min(shapeStartX, mouseX);
         tempShapeY = Math.min(shapeStartY, mouseY);
         var xend = Math.max(shapeStartX, mouseX);
@@ -58,8 +66,8 @@ function mouseDragged(){
 }
 
 function mouseReleased(){
-    if(radio.value() == 'room' && mouseX < width && mouseY < height){
-        rooms.push(new Room(tempShapeX, tempShapeY, tempShapeW, tempShapeH));
+    if(radio.value() == 'house' && mouseX < width && mouseY < height){
+        this.house = new House(tempShapeX, tempShapeY, tempShapeW, tempShapeH);
     }
 
     tempShapeX, tempShapeY, tempShapeW, tempShapeH = null;
