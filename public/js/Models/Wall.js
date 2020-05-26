@@ -1,14 +1,24 @@
 class Wall{
+
+    x1;
+    x2;
+    y1;
+    y2;
+
+    thickness = 5;
+
+    selected  = false;
+    hover = false;
+
+    type;
     constructor(x1, y1, x2, y2){
         this.x1 = x1;
         this.x2 = x2;
         this.y1 = y1;
         this.y2 = y2;
 
-        this.thickness = 5;
-
-        this.selected = false;
-        this.hover = false;
+        if(this.x1 == this.x2) this.type = "vertical";
+        if(this.y1 == this.y2) this.type = "horizontal";
     }
 
     show(){
@@ -25,16 +35,17 @@ class Wall{
         if(this.x1 == this.x2){
             if(pointerY < this.y2 && pointerY > this.y1 && pointerX < this.x1 + (this.thickness) && pointerX > this.x1 - (this.thickness)){
                 this.selected = true;
-                return;
+                return this;
             }
         }else if(this.y1 == this.y2){
             if(pointerX < this.x2 && pointerX > this.x1 && pointerY < this.y1 + (this.thickness) && pointerY > this.y1 - (this.thickness)){
                 this.selected = true
-                return;
+                return this;
             }
         }else{
         }
         this.selected = false;
+        return this;
     }
 
     wallHover(pointerX, pointerY){
@@ -52,6 +63,11 @@ class Wall{
             }else{
             }
         }
+        this.hover = false;
+    }
+
+    unselect(){
+        this.selected = false;
         this.hover = false;
     }
 }
