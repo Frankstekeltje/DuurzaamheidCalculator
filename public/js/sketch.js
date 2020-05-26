@@ -62,26 +62,7 @@ function mouseClicked(){
             this.roomBoundaries = null;
         }
     }else if(radio.value() == 'wall' && this.selectedWall != null){
-        this.selectedWallArray = house.wallSelected();
-        if(Array.isArray(this.selectedWallArray)){
-            if(this.selectedWallArray[0].type == "vertical" && this.selectedWallArray[0].type == this.selectedWall.type){
-                var calcVar = abs(this.roomBoundaries.y + this.roomBoundaries.h - mouseY);
-                this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, this.roomBoundaries.w, mouseY - this.roomBoundaries.y);
-                this.house.addRoom(this.roomBoundaries.x, mouseY, this.roomBoundaries.w, calcVar);
-                this.house.unselectAll();
-            }else if(this.selectedWallArray[0].type == "horizontal" && this.selectedWallArray[0].type == this.selectedWall.type){
-                var calcVar = abs(this.roomBoundaries.x + this.roomBoundaries.w - mouseX);
-                this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, mouseX - this.roomBoundaries.x ,this.roomBoundaries.h);
-                this.house.addRoom(mouseX, this.roomBoundaries.y, calcVar, this.roomBoundaries.h);
-                this.house.unselectAll();
-            }else{
-                this.selectedWall = null;
-                this.roomBoundaries = null;
-            }
-        }else{
-            this.selectedWall = null;
-            this.roomBoundaries = null;
-        }
+        wallCreation();
     }
 }
 
@@ -139,5 +120,24 @@ function checkBoundaries(){
 }
 
 function wallCreation(){
-
+    this.selectedWallArray = house.wallSelected();
+    if(Array.isArray(this.selectedWallArray)){
+        if(this.selectedWallArray[0].type == "vertical" && this.selectedWallArray[0].type == this.selectedWall.type){
+            var calcVar = abs(this.roomBoundaries.y + this.roomBoundaries.h - mouseY);
+            this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, this.roomBoundaries.w, mouseY - this.roomBoundaries.y);
+            this.house.addRoom(this.roomBoundaries.x, mouseY, this.roomBoundaries.w, calcVar);
+            this.house.unselectAll();
+        }else if(this.selectedWallArray[0].type == "horizontal" && this.selectedWallArray[0].type == this.selectedWall.type){
+            var calcVar = abs(this.roomBoundaries.x + this.roomBoundaries.w - mouseX);
+            this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, mouseX - this.roomBoundaries.x ,this.roomBoundaries.h);
+            this.house.addRoom(mouseX, this.roomBoundaries.y, calcVar, this.roomBoundaries.h);
+            this.house.unselectAll();
+        }else{
+            this.selectedWall = null;
+            this.roomBoundaries = null;
+        }
+    }else{
+        this.selectedWall = null;
+        this.roomBoundaries = null;
+    }
 }
