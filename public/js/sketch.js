@@ -1,6 +1,7 @@
 var shapeStartX, shapeStartY;
 var tempShapeX, tempShapeY, tempShapeW, tempShapeH = null;
 var house;
+var editElements = [];
 var selectedWall, selectedRoom = null;
 var selectedWallArray, roomBoundaries;
 var walls = [];
@@ -41,6 +42,15 @@ function draw() {
     }
 }
 
+function keyPressed(){
+    if(keyCode === DELETE){
+        if((this.selectedRoom != null || this.selectedWall != null) && confirm("Weet je zeker dat je dit wilt verwijderen, dit kan niet ongedaan worden gemaakt")){
+            if(this.selectedRoom != null) this.house.removeRoom(this.selectedRoom);
+            else if(this.selectedWall != null) this.house.removeWall(this.selectedWall);
+        }
+    }
+}
+
 function mousePressed(){
     if(radio.value() == 'house'){
         shapeStartX = mouseX;
@@ -49,8 +59,22 @@ function mousePressed(){
 }
 
 function mouseClicked(){
-    if(radio.value() == 'select'){
-        house.houseSelected();
+    if(radio.value() == 'select' && mouseX < windowWidth / 1.5 && mouseY < windowHeight - 50){
+        this.selectedRoom = house.houseSelected();
+        if(this.selectedRoom != null){
+            createEditElements();
+        }
+
+        this.selectedWallArray = house.wallSelected();
+        if(Array.isArray(this.selectedWallArray)){
+            this.selectedWall = this.selectedWallArray[0];
+            createEditElements();
+        }else{
+            this.selectedWall = null;
+        }
+
+        if(this.selectedWall == null && this.selectedRoom == null) removeEditElements();
+
     }else if(radio.value() == 'wall' && this.selectedWall == null){
         this.selectedWallArray = house.wallSelected();
         if(Array.isArray(this.selectedWallArray)){
@@ -71,6 +95,8 @@ function mouseMoved(){
         house.wallHover();
     }else if(radio.value() == 'wall' && this.selectedWall != null){
         tempWallCreation();
+    }else if(radio.value() == 'select'){
+        house.wallHover();
     }
 }
 
@@ -139,5 +165,59 @@ function wallCreation(){
     }else{
         this.selectedWall = null;
         this.roomBoundaries = null;
+    }
+}
+
+function createEditElements(){
+    if(this.selectedRoom != null){
+        var selType = createSelect();
+        selType.option('Keuken');
+        selType.option('Huiskamer');
+        selType.option('Badkamer');
+        selType.position(windowWidth / 1.5 + 200, 54)
+        selType.changed(selTypeChanged);
+
+        var inpW = createInput(this.selectedRoom.w.toString());
+        inpW.position(windowWidth / 1.5 + 200, 10);
+        inpW.changed(inpWChanged)
+        var textW = createElement('p1', 'Breedte van de kamer in mm: ');
+        textW.position(windowWidth / 1.5 + 10, 10);
+
+        var inpH = createInput(this.selectedRoom.h.toString());
+        inpH.position(windowWidth / 1.5 + 200, 32);
+        inpH.changed(inpHChanged);
+        var textH = createElement('p1', 'Hoogte van de kamer in mm: ');
+        textH.position(windowWidth / 1.5 + 10, 32);
+
+        this.editElements.push(selType, inpW, textW, inpH, textH);
+    }
+
+    if(this.selectedWall != null){
+
+    }
+}
+
+function removeEditElements(){
+    for (let i = 0; i < this.editElements.length; i++) {
+        this.editElements[i].remove();
+    }
+    this.editElements = [];
+}
+
+function selTypeChanged(){
+    selectedRoom.type = this.value();
+}
+
+function inpWChanged(){
+    if(!Number.isNaN(Number(this.value()))){
+        selectedRoom.w = Number(this.value());
+        selectedRoom.createWalls();
+    }
+}
+
+function inpHChanged(){
+    if(!Number.isNaN(Number(this.value()))){
+        selectedRoom.h = Number(this.value());
+        selectedRoom.createWalls();
     }
 }

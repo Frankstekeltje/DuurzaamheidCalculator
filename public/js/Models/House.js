@@ -1,8 +1,22 @@
 class House{
+    selected = false;
+    rooms = [];
+
+    x;
+    y;
+    w;
+    h;
+
     constructor(x, y, w, h){
-        this.selected = false;
-        this.rooms = [];
-        this.rooms.push(new Room(x, y, w, h));
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+
+        var room = new Room(x,y,w,h);
+        room.houseBoundaries(this.x, this.y, this.w, this.h);
+
+        this.rooms.push(room);
     }
 
     show(){
@@ -14,9 +28,11 @@ class House{
     }
 
     houseSelected(){
+        var selectedRoom = null;
         for(var i = 0; i < this.rooms.length; i++){
-            this.rooms[i].roomSelected(mouseX, mouseY);
+            if(this.rooms[i].roomSelected(mouseX, mouseY)) selectedRoom = this.rooms[i];
         }
+        return selectedRoom;
     }
 
     wallSelected(){
@@ -39,17 +55,27 @@ class House{
         for(var i = 0; i < this.rooms.length; i++){
             this.rooms[i].unselectAll();
         }
-        console.log(this.rooms);
     }
 
     addRoom(x, y, w, h){
-        console.log(x,y,w,h);
-        this.rooms.push(new Room(x, y, w, h));
+        var room = new Room(x, y, w, h);
+        room.houseBoundaries(this.x, this.y, this.w, this.h);
+        this.rooms.push(room);
     }
 
     alterRoom(room, newX, newY, newW, newH){
         for(var i = 0; i < this.rooms.length; i++){
             if(this.rooms[i].x == room.x && this.rooms[i].y == room.y) this.rooms[i].alterRoom(newX, newY, newW, newH);
         }
+    }
+
+    removeRoom(room){
+        for (let i = 0; i < this.rooms.length; i++) {
+            if(this.rooms[i].x == room.x && this.rooms[i].y == room.y) this.rooms.splice(i, 1);
+        }
+    }
+
+    removeWall(wall){
+
     }
 }
