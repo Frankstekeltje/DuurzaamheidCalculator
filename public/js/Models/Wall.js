@@ -44,11 +44,13 @@ class Wall{
     wallSelected(pointerX, pointerY){
         if(this.type == "vertical"){
             if(pointerY < this.y2 && pointerY > this.y1 && pointerX < this.x1 + (this.thickness) && pointerX > this.x1 - (this.thickness)){
+                console.log(this.wallType);
                 this.selected = true;
                 return this;
             }
         }else if(this.type == "horizontal"){
             if(pointerX < this.x2 && pointerX > this.x1 && pointerY < this.y1 + (this.thickness) && pointerY > this.y1 - (this.thickness)){
+                console.log(this.wallType);
                 this.selected = true
                 return this;
             }
