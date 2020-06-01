@@ -10,7 +10,7 @@
 @endsection
 
 @section('body')
-    <script src="/js/three.js"></script>
+    <script src="./js/three.js"></script>
 @endsection
 
 @section('script')
