@@ -57,6 +57,23 @@ class House{
         }
     }
 
+    calcNeighbours(){
+        for(let i = 0; i < this.rooms.length; i++){
+            var mainRoom = this.rooms[i];
+            for(let j = 0; j < this.rooms.length; j++){
+                if(i == j) continue;
+                var calcRoom = this.rooms[j];
+                if(this.roomTouches(mainRoom, calcRoom)){
+                    mainRoom.addNeighbour(calcRoom);
+                }
+            }
+        }
+    }
+
+    roomTouches(room1, room2){
+        if(room1.x + room1.w == room2.x || room1.y + room1.h == room2.y) return true;
+    }
+
     addRoom(x, y, w, h){
         var room = new Room(x, y, w, h);
         room.houseBoundaries(this.x, this.y, this.w, this.h);

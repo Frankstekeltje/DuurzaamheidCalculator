@@ -12,6 +12,7 @@ class Room{
     selected = false;
 
     walls = [];
+    neighbours = [];
 
     type = "";
 
@@ -20,7 +21,6 @@ class Room{
         this.y = y;
         this.w = w;
         this.h = h;
-        this.createWalls();
     }
 
     show(){
@@ -39,6 +39,7 @@ class Room{
         this.houseY = houseY;
         this.houseW = houseW;
         this.houseH = houseH;
+        this.createWalls();
     }
 
     roomSelected(pointerX, pointerY){
@@ -67,6 +68,9 @@ class Room{
 
     houseContainsWall(wall){
         var pointer = wall.getWallMid();
+        console.log(pointer.x, pointer.y);
+        console.log(this.houseX, this.houseW);
+        console.log(this.houseY, this.houseH);
         if((pointer.x < (this.houseX + this.houseW - 2)) && (pointer.x > this.houseX + 2) && (pointer.y < (this.houseY + this.houseH - 2)) && (pointer.y > this.houseY)){
             return "inside";
         }
@@ -78,6 +82,10 @@ class Room{
         for(var i = 0; i < this.walls.length; i++){
             this.walls[i].unselect();
         }
+    }
+
+    addNeighbour(room){
+        this.neighbours.push(room);
     }
 
     alterRoom(x, y, w, h){

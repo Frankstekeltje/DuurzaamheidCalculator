@@ -152,11 +152,13 @@ function wallCreation(){
             var calcVar = abs(this.roomBoundaries.y + this.roomBoundaries.h - mouseY);
             this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, this.roomBoundaries.w, mouseY - this.roomBoundaries.y);
             this.house.addRoom(this.roomBoundaries.x, mouseY, this.roomBoundaries.w, calcVar);
+            this.house.calcNeighbours();
             this.house.unselectAll();
         }else if(this.selectedWallArray[0].type == "horizontal" && this.selectedWallArray[0].type == this.selectedWall.type){
             var calcVar = abs(this.roomBoundaries.x + this.roomBoundaries.w - mouseX);
             this.house.alterRoom(this.roomBoundaries, this.roomBoundaries.x, this.roomBoundaries.y, mouseX - this.roomBoundaries.x ,this.roomBoundaries.h);
             this.house.addRoom(mouseX, this.roomBoundaries.y, calcVar, this.roomBoundaries.h);
+            this.house.calcNeighbours();
             this.house.unselectAll();
         }else{
             this.selectedWall = null;
