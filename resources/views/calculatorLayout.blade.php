@@ -72,7 +72,31 @@
             </ul>
         </nav>
 
-        @yield('body')
+
+        <div class="d-flex" id="wrapper">
+
+            <!-- Sidebar -->
+            <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Calculator selecteren</div>
+            <div class="list-group list-group-flush">
+                <a href="/calculator/muur" class="list-group-item list-group-item-action bg-light">Muur</a>
+                <a href="/calculator/plafond" class="list-group-item list-group-item-action bg-light">Plafond</a>
+                <a href="/calculator/vloer" class="list-group-item list-group-item-action bg-light">Vloer</a>
+                <a href="/calculator" class="list-group-item list-group-item-action bg-light">Huis</a>
+            </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+
+            <div class="container-fluid">
+                @yield('body')
+            </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
 
         <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
             <div class="container-fluid text-center text-md-left">
@@ -113,3 +137,4 @@
         </script>
     </body>
 </html>
+

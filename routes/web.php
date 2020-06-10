@@ -21,6 +21,12 @@ Route::get('/visualisatie', function(){
     return view('visualisatie');
 })->name('visualisatie')->middleware('verified');
 
+Route::get('/calculator', ['uses' => 'GebouwenController@create', 'as' => 'calculator'] );
+
+Route::get('/calculator/{type}', ['uses' => 'GebouwenController@create']);
+
+Route::post('/calculator/{type}', ['uses' =>'GebouwenController@store']);
+
 Route::get('/contact', 'ContactMessageController@create')->name('contact');
 
 Route::post('/contact', 'ContactMessageController@store')->name('contact.store');
