@@ -1,9 +1,5 @@
 @extends('calculatorLayout')
 
-@section('head')
-    <link href="{{ asset('css/selectize.default.css') }}" rel="stylesheet">
-@endsection
-
 @section('body')
     @if(!empty($_GET["amount"]))
         @if($_GET["amount"] < 0 || is_int($_GET["amount"]))
@@ -31,26 +27,45 @@
                             $prevMaterialType = $material->type;
                         @endphp
                         <optgroup label="{{$material->type}}">
-                            <option value="{{$material->id}}">{{$material->name}}</option>
+                            @if($material->type != "Luchtspouw")
+                                <option value="{{$material->id}}">{{$material->name}}</option>
+                            @else
+                                @if(strpos($material->name, 'wand') !== false)
+                                    <option value="{{$material->id}}">{{$material->name}}</option>
+                                @endif
+                            @endif
                     @elseif($prevMaterialType == $material->type)
-                            <option value="{{$material->id}}">{{$material->name}}</option>
+                            @if($material->type != "Luchtspouw")
+                                <option value="{{$material->id}}">{{$material->name}}</option>
+                            @else
+                                @if(strpos($material->name, 'wand') !== false)
+                                    <option value="{{$material->id}}">{{$material->name}}</option>
+                                @endif
+                            @endif
                     @else
                         @php
                             $prevMaterialType = $material->type;
                         @endphp
                         </optgroup>
                         <optgroup label="{{$material->type}}">
-                            <option value="{{$material->id}}">{{$material->name}}</option>
+                            @if($material->type != "Luchtspouw")
+                                <option value="{{$material->id}}">{{$material->name}}</option>
+                            @else
+                                @if(strpos($material->name, 'wand') !== false)
+                                    <option value="{{$material->id}}">{{$material->name}}</option>
+                                @endif
+                            @endif
                     @endif
                 @endforeach
                         </optgroup>
             </select>
-            <input class="select{{$i}}" type="text" name="dikte[]" onkeypress="return isNumber(event)">
+            <input placeholder="Dikte in mm" class="select{{$i}}" type="text" name="dikte[]" onkeypress="return isNumber(event)">
             <button onclick="removeSelect('select{{$i}}')" id="select{{$i}}" type="button" class="btn btn-outline-danger btn-sm select{{$i}}">X</button>
             <br>
             <br>
         @endfor
-        <label>Naam van muur:</label><input type="text" name="naam">
+        <input placeholder="Naam van muur..." type="text" name="naam">
+        <br>
         <input type="hidden" value="muur" name="type">
         <br>
         <button type="submit" name="submitButton" class="btn btn-outline-success">Maak muur aan</button>

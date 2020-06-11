@@ -97,41 +97,6 @@
             <!-- /#page-content-wrapper -->
 
         </div>
-
-        <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
-            <div class="container-fluid text-center text-md-left">
-                <div class="row">
-                    <div class="col-sm-6 col-md-8">
-                        <h5 class="text-uppercase">Footer Content</h5>
-                        <p>Here you can use rows and columns to organize your footer content.</p>
-                    </div>
-                    <hr class="clearfix w-100 d-md-none pb-3">
-                    <div class="col-6 col-md-4">
-                        <h5 class="text-uppercase">Links</h5>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{{ route('welcome') }}">home</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('overons') }}">overons</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('contact') }}">contact</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('login') }}">Inloggen</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}">Registeren</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright text-center py-3">© 2020 Copyright
-            </div>
-        </footer>
-
         <script>
             @yield('script')
         </script>

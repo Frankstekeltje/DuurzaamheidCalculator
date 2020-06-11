@@ -28,21 +28,22 @@ class GebouwenController extends Controller
                 break;
             case "plafond":
                 return view('plafond', [
-                    'materials' => Material::where('type', '!=', 'glas')
-                                            ->where('type', '!=', 'Luchtspouw')
-                                            ->get()
+                    'materials' => Material::all()
                 ]);
                 break;
             case "vloer":
                 return view('vloer', [
-                    'materials' => Material::where('type', '!=', 'glas')
-                                            ->where('type', '!=', 'Luchtspouw')
-                                            ->get()
+                    'materials' => Material::all()
                 ]);
                 break;
             case "":
                 return view('calculator', [
-                    'gebouwen' => Gebouw::all()
+                    'walls' => Gebouw::where('type', 'muur')
+                                     ->get(),
+                    'ceilings' => Gebouw::where('type', 'plafond')
+                                        ->get(),
+                    'floors' => Gebouw::where('type', 'vloer')
+                                        ->get()
                 ]);
                 break;
         }
