@@ -18,7 +18,7 @@ class CreateGebouwsTable extends Migration
             $table->string('name');
             $table->string('type');
             $table->string('saveString');
-            $table->float('value', 8, 3);
+            $table->float('value', 20, 3);
         });
     }
 

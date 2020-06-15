@@ -36,7 +36,7 @@ class GebouwenController extends Controller
                     'materials' => Material::all()
                 ]);
                 break;
-            case "":
+            case "ruimte":
                 return view('calculator', [
                     'walls' => Gebouw::where('type', 'muur')
                                      ->get(),
@@ -44,6 +44,12 @@ class GebouwenController extends Controller
                                         ->get(),
                     'floors' => Gebouw::where('type', 'vloer')
                                         ->get()
+                ]);
+                break;
+            case "gebouw":
+                return view('gebouw', [
+                    'spaces' => Gebouw::where('type', 'ruimte')
+                        ->get()
                 ]);
                 break;
         }
@@ -82,12 +88,57 @@ class GebouwenController extends Controller
 
         $gebouw->save();
 
-        return redirect('/calculator');
+        return redirect('/calculator/muur');
 
     }
 
-    public function edit(){
-        //Shows the edit resource
+    public function storeRoom(){
+        request()->validate([
+            'naam' => 'required',
+            'gebouwen.*' => 'required',
+            'height.*' => 'required',
+            'width.*' => 'required',
+            'tempIn.*' => 'required',
+            'tempOut.*' => 'required'
+            ]);
+
+        $gebArr = request('gebouwen');
+        $heightArr = request('height');
+        $widthArr = request('width');
+        $tempIn = request('tempIn');
+        $tempOut = request('tempOut');
+
+        $totalValue = 0;
+        $saveString = "";
+
+        for($i = 0; $i < count($gebArr); $i++){
+            $geb = Gebouw::find($gebArr[$i]);
+            $totalValue += (($tempIn[$i] - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
+            $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i] . ';';
+        }
+
+//        $ruimteArr = request('ruimtes');
+//
+//        $totalValue = 0;
+//
+//        for($i = 0; $i < count($ruimteArr); $i++){
+//            $totalValue += $ruimteArr[$i]->value;
+//        }
+//
+
+        $gebouw = new Gebouw();
+        $gebouw->name = request('naam');
+        $gebouw->type = "ruimte";
+        $gebouw->value = round($totalValue, 3);
+        $gebouw->saveString = $saveString;
+
+        $gebouw->save();
+
+        return redirect('/calculator/muur');
+    }
+
+    public function storeBuilding(){
+
     }
 
     public function update(){
