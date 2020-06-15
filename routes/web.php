@@ -29,6 +29,8 @@ Route::get('/calculator/{type}', ['uses' => 'GebouwenController@create']);
 
 Route::post('/calculator/ruimte', ['uses' => 'GebouwenController@storeRoom']);
 
+Route::post('/calculator/gebouw', ['uses' => 'GebouwenController@storeBuilding']);
+
 Route::post('/calculator/{type}', ['uses' =>'GebouwenController@store']);
 
 Route::get('/contact', 'ContactMessageController@create')->name('contact');

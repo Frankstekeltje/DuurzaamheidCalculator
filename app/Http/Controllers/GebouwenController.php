@@ -48,7 +48,7 @@ class GebouwenController extends Controller
                 break;
             case "gebouw":
                 return view('gebouw', [
-                    'spaces' => Gebouw::where('type', 'ruimte')
+                    'rooms' => Gebouw::where('type', 'ruimte')
                         ->get()
                 ]);
                 break;
@@ -117,15 +117,6 @@ class GebouwenController extends Controller
             $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i] . ';';
         }
 
-//        $ruimteArr = request('ruimtes');
-//
-//        $totalValue = 0;
-//
-//        for($i = 0; $i < count($ruimteArr); $i++){
-//            $totalValue += $ruimteArr[$i]->value;
-//        }
-//
-
         $gebouw = new Gebouw();
         $gebouw->name = request('naam');
         $gebouw->type = "ruimte";
@@ -134,11 +125,34 @@ class GebouwenController extends Controller
 
         $gebouw->save();
 
-        return redirect('/calculator/muur');
+        return redirect('/calculator/ruimte');
     }
 
     public function storeBuilding(){
+        request()->validate([
+                'ruimtes.*' => 'required'
+            ]);
 
+        $ruimteArr = request('ruimtes');
+
+        $totalValue = 0;
+        $saveString = "";
+
+        for($i = 0; $i < count($ruimteArr); $i++){
+            $ruimte = Gebouw::find($ruimteArr[$i]);
+            $totalValue += $ruimte->value;
+            $saveString .= $ruimteArr[$i] . ';';
+        }
+
+        $gebouw = new Gebouw();
+        $gebouw->name = request('naam');
+        $gebouw->type = "gebouw";
+        $gebouw->value = round($totalValue, 3);
+        $gebouw->saveString = $saveString;
+
+        $gebouw->save();
+
+        return redirect('/calculator/gebouw');
     }
 
     public function update(){
