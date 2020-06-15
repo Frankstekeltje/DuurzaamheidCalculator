@@ -19,25 +19,29 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/overons', function(){
+    return view('overons');
+})->name('overons');
+
 Route::get('/visualisatie', function(){
     return view('visualisatie');
 })->name('visualisatie')->middleware('verified');
 
-Route::get('/calculator', ['uses' => 'GebouwenController@create', 'as' => 'calculator'] );
+Route::get('/calculator', 'GebouwenController@index');
 
-Route::get('/calculator/{type}', ['uses' => 'GebouwenController@create']);
+Route::get('/calculator/{type}', 'GebouwenController@create');
 
-Route::post('/calculator/ruimte', ['uses' => 'GebouwenController@storeRoom']);
+Route::post('/calculator/ruimte', 'GebouwenController@storeRoom');
 
-Route::post('/calculator/{type}', ['uses' =>'GebouwenController@store']);
+Route::post('/calculator/{type}', 'GebouwenController@store');
+
+Route::get('/calculator/{id}/edit', 'GebouwenController@edit');
+
+Route::put('/calculator/{id}/edit', 'GebouwenController@update');
 
 Route::get('/contact', 'ContactMessageController@create')->name('contact');
 
 Route::post('/contact', 'ContactMessageController@store')->name('contact.store');
-
-Route::get('/overons', function(){
-    return view('overons');
-})->name('overons');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
