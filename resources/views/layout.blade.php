@@ -74,7 +74,7 @@
 
         @yield('body')
 
-        <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
+        {{-- <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
             <div class="container-fluid text-center text-md-left">
                 <div class="row">
                     <div class="col-sm-6 col-md-8">
@@ -106,7 +106,7 @@
             </div>
             <div class="footer-copyright text-center py-3">© 2020 Copyright
             </div>
-        </footer>
+        </footer> --}}
 
         <script>
             @yield('script')
