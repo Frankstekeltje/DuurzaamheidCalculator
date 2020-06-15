@@ -72,6 +72,7 @@ class House{
 
     roomTouches(room1, room2){
         if(room1.x + room1.w == room2.x || room1.y + room1.h == room2.y) return true;
+
     }
 
     addRoom(x, y, w, h){

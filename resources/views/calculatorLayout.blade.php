@@ -72,44 +72,34 @@
             </ul>
         </nav>
 
-        @yield('body')
 
-        {{-- <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
-            <div class="container-fluid text-center text-md-left">
-                <div class="row">
-                    <div class="col-sm-6 col-md-8">
-                        <h5 class="text-uppercase">Footer Content</h5>
-                        <p>Here you can use rows and columns to organize your footer content.</p>
-                    </div>
-                    <hr class="clearfix w-100 d-md-none pb-3">
-                    <div class="col-6 col-md-4">
-                        <h5 class="text-uppercase">Links</h5>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="{{ route('welcome') }}">home</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('overons') }}">overons</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('contact') }}">contact</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('login') }}">Inloggen</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('register') }}">Registeren</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright text-center py-3">© 2020 Copyright
-            </div>
-        </footer> --}}
+        <div class="d-flex" id="wrapper">
 
+            <!-- Sidebar -->
+            <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Calculator selecteren</div>
+            <div class="list-group list-group-flush">
+                <a href="/calculator/muur" class="list-group-item list-group-item-action bg-light">Muur</a>
+                <a href="/calculator/plafond" class="list-group-item list-group-item-action bg-light">Plafond</a>
+                <a href="/calculator/vloer" class="list-group-item list-group-item-action bg-light">Vloer</a>
+                <a href="/calculator" class="list-group-item list-group-item-action bg-light">Huis</a>
+            </div>
+            </div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+
+            <div class="container-fluid">
+                @yield('body')
+            </div>
+            </div>
+            <!-- /#page-content-wrapper -->
+
+        </div>
         <script>
             @yield('script')
         </script>
     </body>
 </html>
+
