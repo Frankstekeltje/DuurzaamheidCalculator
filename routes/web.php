@@ -29,15 +29,11 @@ Route::get('/visualisatie', function(){
 
 Route::get('/calculator', 'GebouwenController@index');
 
-Route::get('/calculator', ['uses' => 'GebouwenController@create', 'as' => 'calculator'] );
+Route::get('/calculator/{type}', 'GebouwenController@create');
 
-Route::get('/calculator/{type}', ['uses' => 'GebouwenController@create']);
+Route::post('/calculator/ruimte', 'GebouwenController@storeRoom');
 
-Route::post('/calculator/ruimte', ['uses' => 'GebouwenController@storeRoom']);
-
-Route::post('/calculator/gebouw', ['uses' => 'GebouwenController@storeBuilding']);
-
-Route::post('/calculator/{type}', ['uses' =>'GebouwenController@store']);
+Route::post('/calculator/{type}', 'GebouwenController@store');
 
 Route::get('/calculator/{id}/edit', 'GebouwenController@edit');
 

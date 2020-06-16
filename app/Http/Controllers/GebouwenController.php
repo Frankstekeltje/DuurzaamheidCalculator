@@ -15,6 +15,9 @@ class GebouwenController extends Controller
 
     public function index(){
         //render a list of the resource
+        return view('calculator', [
+            'gebouwen' => Gebouw::all()
+        ]);
     }
 
     public function create($type = ""){
@@ -37,7 +40,7 @@ class GebouwenController extends Controller
                 ]);
                 break;
             case "ruimte":
-                return view('calculator', [
+                return view('ruimte', [
                     'walls' => Gebouw::where('type', 'muur')
                                      ->get(),
                     'ceilings' => Gebouw::where('type', 'plafond')
@@ -77,7 +80,8 @@ class GebouwenController extends Controller
         $saveString = "";
 
         for($i = 0; $i < count($matArr); $i++){
-            $saveString .= $matArr[$i] . ":" . $dikteArr[$i] . ";";
+            if($i == 0) $saveString .= $matArr[$i] . ":" . $dikteArr[$i];
+            else $saveString .= ";" . $matArr[$i] . ":" . $dikteArr[$i];
         }
 
         $gebouw = new Gebouw();
@@ -88,7 +92,7 @@ class GebouwenController extends Controller
 
         $gebouw->save();
 
-        return redirect('/calculator/muur');
+        return redirect('/calculator');
 
     }
 
@@ -114,7 +118,8 @@ class GebouwenController extends Controller
         for($i = 0; $i < count($gebArr); $i++){
             $geb = Gebouw::find($gebArr[$i]);
             $totalValue += (($tempIn[$i] - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
-            $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i] . ';';
+            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
+            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
         }
 
         $gebouw = new Gebouw();
@@ -234,6 +239,43 @@ class GebouwenController extends Controller
         $gebouw->name = request('naam');
         $gebouw->type = request('type');
         $gebouw->value = $value;
+        $gebouw->saveString = $saveString;
+
+        $gebouw->save();
+
+        return redirect('/calculator');
+    }
+
+    public function updateRuimte($id){
+        request()->validate([
+            'naam' => 'required',
+            'gebouwen.*' => 'required',
+            'height.*' => 'required',
+            'width.*' => 'required',
+            'tempIn.*' => 'required',
+            'tempOut.*' => 'required'
+            ]);
+
+        $gebArr = request('gebouwen');
+        $heightArr = request('height');
+        $widthArr = request('width');
+        $tempIn = request('tempIn');
+        $tempOut = request('tempOut');
+
+        $totalValue = 0;
+        $saveString = "";
+
+        for($i = 0; $i < count($gebArr); $i++){
+            $geb = Gebouw::find($gebArr[$i]);
+            $totalValue += (($tempIn[$i] - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
+            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
+            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
+        }
+
+        $gebouw = Gebouw::find($id);
+        $gebouw->name = request('naam');
+        $gebouw->type = "ruimte";
+        $gebouw->value = round($totalValue, 3);
         $gebouw->saveString = $saveString;
 
         $gebouw->save();

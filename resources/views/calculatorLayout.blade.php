@@ -79,11 +79,11 @@
             <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Calculator selecteren</div>
             <div class="list-group list-group-flush">
-                <a href="../calculator/muur" class="list-group-item list-group-item-action bg-light">Muur</a>
-                <a href="../calculator/plafond" class="list-group-item list-group-item-action bg-light">Plafond</a>
-                <a href="../calculator/vloer" class="list-group-item list-group-item-action bg-light">Vloer</a>
-                <a href="../calculator/ruimte" class="list-group-item list-group-item-action bg-light">ruimte</a>
-                <a href="../calculator/gebouw" class="list-group-item list-group-item-action bg-light">gebouw</a>
+                <a href="../../calculator/muur" class="list-group-item list-group-item-action bg-light">Muur</a>
+                <a href="../../calculator/plafond" class="list-group-item list-group-item-action bg-light">Plafond</a>
+                <a href="../../calculator/vloer" class="list-group-item list-group-item-action bg-light">Vloer</a>
+                <a href="../../calculator/ruimte" class="list-group-item list-group-item-action bg-light">Ruimte</a>
+                <a href="../../calculator/gebouw" class="list-group-item list-group-item-action bg-light">Gebouw</a>
                 <a href="../../calculator" class="list-group-item list-group-item-action bg-light">Overzicht</a>
             </div>
             </div>
