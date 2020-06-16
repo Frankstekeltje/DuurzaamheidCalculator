@@ -155,8 +155,94 @@ class GebouwenController extends Controller
         return redirect('/calculator/gebouw');
     }
 
-    public function update(){
+    public function edit($id){
+        if(Gebouw::where('id', '=', $id)->exists()){
+            $gebouw = Gebouw::find($id);
+            $type = $gebouw->type;
+            switch($type){
+                case "muur":
+                    return view('muurEdit', [
+                        'materials' => Material::all(),
+                        'gebouw' => $gebouw
+                    ]);
+                    break;
+                case "plafond":
+                    return view('plafondEdit', [
+                        'materials' => Material::all(),
+                        'gebouw' => $gebouw
+                    ]);
+                    break;
+                case "vloer":
+                    return view('vloerEdit', [
+                        'materials' => Material::all(),
+                        'gebouw' => $gebouw
+                    ]);
+                    break;
+                case "ruimte":
+                    return view('ruimteEdit', [
+                        'walls' => Gebouw::where('type', 'muur')
+                            ->get(),
+                        'ceilings' => Gebouw::where('type', 'plafond')
+                            ->get(),
+                        'floors' => Gebouw::where('type', 'vloer')
+                            ->get(),
+                        'gebouw' => $gebouw
+                    ]);
+                    break;
+                case "gebouw":
+                    return view('gebouwEdit', [
+                        'rooms' => Gebouw::where('type', 'ruimte')
+                            ->get(),
+                        'gebouw' => $gebouw
+                    ]);
+                    break;
+            }
+        }
+        return redirect('/calculator');
+    }
+
+    public function update($id){
         //Save the edited resource
+        $gebouw = Gebouw::find($id);
+        if($gebouw->type == "ruimte") return $this->updateRuimte($id);
+        else if($gebouw->type == "gebouw") return $this->updateGebouw($id);
+
+        request()->validate([
+            'select.*' => 'required',
+            'dikte.*' => 'required',
+            'naam' => 'required',
+            'type' => 'required'
+        ]);
+
+        $value = 0;
+        $matArr = request('select');
+        $dikteArr = request('dikte');
+
+        for($i = 0; $i < count($matArr); $i++){
+            $material = Material::find($matArr[$i]);
+            if($material->type == "glas" || $material->type == "Luchtspouw") $value += $material->value;
+            else $value += ($dikteArr[$i] / $material->value);
+        }
+
+        $saveString = "";
+
+        for($i = 0; $i < count($matArr); $i++){
+            if($i == 0) $saveString .= $matArr[$i] . ":" . $dikteArr[$i];
+            else $saveString .= ";" . $matArr[$i] . ":" . $dikteArr[$i];
+        }
+
+        $gebouw->name = request('naam');
+        $gebouw->type = request('type');
+        $gebouw->value = $value;
+        $gebouw->saveString = $saveString;
+
+        $gebouw->save();
+
+        return redirect('/calculator');
+    }
+
+    public function updateGebouw($id){
+
     }
 
     public function destroy(){
