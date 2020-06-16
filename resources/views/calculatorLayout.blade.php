@@ -84,6 +84,7 @@
                 <a href="../calculator/vloer" class="list-group-item list-group-item-action bg-light">Vloer</a>
                 <a href="../calculator/ruimte" class="list-group-item list-group-item-action bg-light">ruimte</a>
                 <a href="../calculator/gebouw" class="list-group-item list-group-item-action bg-light">gebouw</a>
+                <a href="../../calculator" class="list-group-item list-group-item-action bg-light">Overzicht</a>
             </div>
             </div>
             <!-- /#sidebar-wrapper -->
