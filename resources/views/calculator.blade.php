@@ -16,7 +16,7 @@
                     <td>{{$gebouw->name}}</td>
                     <td>{{$gebouw->type}}</td>
                     <td>{{$gebouw->value}}</td>
-                    <td><button onclick="document.location = '../../calculator/{{$gebouw->id}}/edit'" type="button" class="btn btn-outline-success btn-sm">Edit</button></td>
+                    <td><button onclick="document.location = 'public/../calculator/{{$gebouw->id}}/edit'" type="button" class="btn btn-outline-success btn-sm">Edit</button></td>
                 </tr>
             @endforeach
         </table>

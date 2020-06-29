@@ -3,8 +3,10 @@
 @section('body')
 
         @php    $saveString = $gebouw->saveString;
+                $saveString = substr($saveString, 0, strlen($saveString) - 1);
                 $saveArr = explode(";", $saveString);
-                $saveAmount = count($saveArr); @endphp
+                $saveAmount = count($saveArr);
+        @endphp
 
     <form action="" method="POST">
         @csrf

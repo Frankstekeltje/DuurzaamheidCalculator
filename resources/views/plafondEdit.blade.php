@@ -5,11 +5,14 @@
 @endsection
 
 @section('body')
-        @php    $saveString = $gebouw->saveString;
-                $saveArr = explode(";", $saveString);
-                $saveAmount = count($saveArr); @endphp
+        @php
+            $saveString = $gebouw->saveString;
+            $saveString = substr($saveString, 0, strlen($saveString) - 1);
+            $saveArr = explode(";", $saveString);
+            $saveAmount = count($saveArr);
+        @endphp
 
-    <form action="" method="POST">
+        <form action="" method="POST">
         @csrf
         @method('PUT')
         @for ($i = 0; $i < $saveAmount; $i++)

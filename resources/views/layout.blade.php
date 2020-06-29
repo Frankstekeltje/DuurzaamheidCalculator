@@ -8,68 +8,59 @@
         <script src="{{ asset('js/app.js') }}" defer></script>
         @yield('head')
     </head>
-    <body>
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <body class="has-navbar-fixed-top">
+        <nav class="navbar is-danger is-fixed-top" role="navigation" aria-label="main navigation">
             @guest
             @if(Route::has('register'))
-            <ul class="navbar-nav">
-                <li class="nav-item {{ Request::path() === '/' ? 'active' : null }}">
-                    <a class="nav-link" href="{{ route('welcome') }}">Home</a>
-                </li>
-                <li class="nav-item {{ Request::path() === 'overons' ? 'active' : ''}}">
-                    <a class="nav-link" href="{{ route('overons') }}">Over ons</a>
-                </li>
-                <li class="nav-item {{ Request::path() === 'contact' ? 'active' : ''}}">
-                    <a class="nav-link" href="{{ route('contact') }}">Contact</a>
-                </li>
-            </ul>
+
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="{{ route('welcome') }}">Home</a>
+                    <a class="navbar-item" href="{{ route('overons') }}">Over ons</a>
+                    <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
+                </div>
+
+            </div>
             @endif
             @else
-                    <ul class="navbar-nav">
-                        <li class="nav-item {{ Request::path() === '/' ? 'active' : null }}">
-                            <a class="nav-link" href="{{ route('welcome') }}">Home</a>
-                        </li>
-                        <li class="nav-item {{ Request::path() === 'visualisatie' ? 'active' : null }}">
-                            <a class="nav-link" href="{{ route('visualisatie') }}">Visualisatie</a>
-                        </li>
-                        <li class="nav-item {{ Request::path() === 'overons' ? 'active' : ''}}">
-                            <a class="nav-link" href="{{ route('overons') }}">Over ons</a>
-                        </li>
-                        <li class="nav-item {{ Request::path() === 'contact' ? 'active' : ''}}">
-                            <a class="nav-link" href="{{ route('contact') }}">Contact</a>
-                        </li>
-                    </ul>
-            @endguest
-            <ul class="navbar-nav ml-auto">
-                @guest
-                    <li class="nav-item {{ Request::path() === 'login' ? 'active' : ''}}">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
-                    </li>
-                    @if (Route::has('register'))
-                        <li class="nav-item {{ Request::path() === 'register' ? 'active' : ''}}">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Registreren') }}</a>
-                        </li>
-                    @endif
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
+                    <div class="navbar-menu">
+                        <div class="navbar-start">
+                            <a class="navbar-item" href="{{ route('welcome') }}">Home</a>
+                            <a class="navbar-item" href="{{ route('visualisatie') }}">Visualisatie</a>
+                            <a class="navbar-item" href="{{ route('overons') }}">Over ons</a>
+                            <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
                         </div>
-                    </li>
-                @endguest
-            </ul>
+                    </div>
+            @endguest
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        @guest
+                                <a class="button is-danger is-light" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
+                            @if (Route::has('register'))
+                                <a class="button is-danger is-light" href="{{ route('register') }}">{{ __('Registreren') }}</a>
+                            @endif
+                        @else
+                            <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
+                                                             document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </li>
+                        @endguest
+                    </div>
+                </div>
+            </div>
         </nav>
 
         @yield('body')
