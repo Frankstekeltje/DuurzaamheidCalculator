@@ -5,7 +5,7 @@
         $wallArr = [];
         $floorArr = [];
         $ceilingArr = [];
-        $saveArr = explode(";", $gebouw->saveString = substr($gebouw->saveString, 0, strlen($gebouw->saveString) - 1));
+        $saveArr = explode(";", $gebouw->saveString);
         foreach($saveArr as $save){
             list($id, $height, $width, $tempIn, $tempOut) = explode(":", $save);
             $gebouw = App\Gebouw::find($id);
