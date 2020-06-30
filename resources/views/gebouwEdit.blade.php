@@ -3,7 +3,6 @@
 @section('body')
 
     @php        $saveString = $gebouw->saveString;
-                $saveString = substr($saveString, 0, strlen($saveString) - 1);
                 $saveArr = explode(";", $saveString);
                 $roomAmount = count($saveArr);
     @endphp
@@ -20,8 +19,9 @@
                         @endforeach
                         </div>
                     </select>
-                @endfor
                     <br>
+                    <br>
+                @endfor
                     <br>
                     <input value="{{$gebouw->name}}" placeholder="Naam van gebouw..." type="text" name="naam">
                     <br>

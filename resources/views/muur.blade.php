@@ -64,9 +64,14 @@
             <br>
             <br>
         @endfor
+        <select name="type">
+            <option value="binnenMuur">Binnen Muur</option>
+            <option value="buitenMuur">Buiten Muur</option>
+        </select>
+        <br>
+        <br>
         <input placeholder="Naam van muur..." type="text" name="naam">
         <br>
-        <input type="hidden" value="muur" name="type">
         <br>
         <button type="submit" name="submitButton" class="btn btn-outline-success">Maak muur aan</button>
     </form>

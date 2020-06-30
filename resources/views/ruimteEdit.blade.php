@@ -8,8 +8,8 @@
         $saveArr = explode(";", $gebouw->saveString);
         foreach($saveArr as $save){
             list($id, $height, $width, $tempIn, $tempOut) = explode(":", $save);
-            $gebouw = App\Gebouw::find($id);
-            switch($gebouw->type){
+            $gebouwTemp = App\Gebouw::find($id);
+            switch($gebouwTemp->type){
                 case "muur":
                     array_push($wallArr, $save);
                     break;

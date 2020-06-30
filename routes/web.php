@@ -23,27 +23,25 @@ Route::get('/overons', function(){
     return view('overons');
 })->name('overons');
 
-Route::get('/visualisatie', function(){
-    return view('visualisatie');
-})->name('visualisatie')->middleware('verified');
+Route::get('/calculator', 'GebouwenController@index')->name('calculator')->middleware('verified');
 
-Route::get('/calculator', 'GebouwenController@index')->name('calculator');
+Route::get('/calculator/{type}', 'GebouwenController@create')->middleware('verified');
 
-Route::get('/calculator/{type}', 'GebouwenController@create');
+Route::post('/calculator/{type}', 'GebouwenController@store')->middleware('verified');
 
-Route::post('/calculator/ruimte', 'GebouwenController@storeRoom');
+Route::get('/calculator/{id}/edit', 'GebouwenController@edit')->middleware('verified');
 
-Route::post('/calculator/{type}', 'GebouwenController@store');
-
-Route::get('/calculator/{id}/edit', 'GebouwenController@edit');
-
-Route::put('/calculator/{id}/edit', 'GebouwenController@update');
+Route::put('/calculator/{id}/edit', 'GebouwenController@update')->middleware('verified');
 
 Route::get('/contact', 'ContactMessageController@create')->name('contact');
 
 Route::post('/contact', 'ContactMessageController@store')->name('contact.store');
 
 Route::get('/home', 'HomeController@index', 'GebouwenController@index')->name('home')->middleware('verified');
+
+Route::get('/overzicht', 'GebouwenController@indexBuilding')->middleware('verified');
+
+Route::get('/overzicht/{id}', 'GebouwenController@show');
 
 Route::get('/cms', 'DatabaseController@index')->name('cms')->middleware('verified');
 

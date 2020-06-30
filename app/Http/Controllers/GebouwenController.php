@@ -9,8 +9,26 @@ use Mockery\Undefined;
 
 class GebouwenController extends Controller
 {
-    public function show(){
+    public function show($id){
         //render a single resource
+        $gebouw = Gebouw::where('type', 'gebouw')->find($id);
+        $ruimtes = Gebouw::where('type', 'ruimte')->get();
+        $walls = Gebouw::where('type', 'buitenMuur')
+                            ->get();
+        $ceilings = Gebouw::where('type', 'plafond')->get();
+        $floors = Gebouw::where('type', 'vloer')->get();
+
+        if($gebouw != null){
+            return view('gebouwOverzicht', [
+                'gebouw' => $gebouw,
+                'ruimtes' => $ruimtes,
+                'muren' => $walls,
+                'plafonds' => $ceilings,
+                'vloeren' => $floors
+            ]);
+        }else{
+            return redirect()->action('GebouwenController@indexBuilding');
+        }
     }
 
     public function index(){
@@ -18,6 +36,14 @@ class GebouwenController extends Controller
         $gebouwen = Gebouw::paginate(5);
 
         return view('calculator', [
+            'gebouwen' => $gebouwen
+        ]);
+    }
+
+    public function indexBuilding(){
+        $gebouwen = Gebouw::where('type', 'gebouw')->get();
+
+        return view('overzicht', [
             'gebouwen' => $gebouwen
         ]);
     }
@@ -43,7 +69,8 @@ class GebouwenController extends Controller
                 break;
             case "ruimte":
                 return view('ruimte', [
-                    'walls' => Gebouw::where('type', 'muur')
+                    'walls' => Gebouw::where('type', 'buitenMuur')
+                                     ->orWhere('type', 'binnenMuur')
                                      ->get(),
                     'ceilings' => Gebouw::where('type', 'plafond')
                                         ->get(),
@@ -62,6 +89,9 @@ class GebouwenController extends Controller
 
     public function store($type){
         //Save the created resource
+        if($type == "ruimte") return $this->storeRoom();
+        if($type == "gebouw") return $this->storeBuilding();
+
         request()->validate([
             'select.*' => 'required',
             'dikte.*' => 'required',
@@ -132,12 +162,13 @@ class GebouwenController extends Controller
 
         $gebouw->save();
 
-        return redirect('/calculator/ruimte');
+        return redirect('/calculator');
     }
 
     public function storeBuilding(){
         request()->validate([
-                'ruimtes.*' => 'required'
+                'ruimtes.*' => 'required',
+                'naam' => 'required'
             ]);
 
         $ruimteArr = request('ruimtes');
@@ -160,7 +191,7 @@ class GebouwenController extends Controller
 
         $gebouw->save();
 
-        return redirect('/calculator/gebouw');
+        return redirect('/calculator');
     }
 
     public function edit($id){
