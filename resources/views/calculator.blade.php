@@ -1,24 +1,27 @@
 @extends('calculatorLayout')
 
 @section('body')
-    <div style="text-align:center">
-        <br>
-        <br>
-        <table style="border:1px solid black;margin-left:auto;margin-right:auto;">
-            <tr>
-                <th>Naam</th>
-                <th>Type</th>
-                <th>R waarde</th>
-                <th>   </th>
-            </tr>
-            @foreach ($gebouwen as $gebouw)
+        <table class="table is-bordered is-striped is-narrow is-hoverable">
+            <thead>
                 <tr>
-                    <td>{{$gebouw->name}}</td>
-                    <td>{{$gebouw->type}}</td>
-                    <td>{{$gebouw->value}}</td>
-                    <td><button onclick="document.location = 'public/../calculator/{{$gebouw->id}}/edit'" type="button" class="btn btn-outline-success btn-sm">Edit</button></td>
+                    <th>Naam</th>
+                    <th>Type</th>
+                    <th>R waarde</th>
+                    <th>   </th>
                 </tr>
+            </thead>
+            <tbody>
+            @foreach ($gebouwen as $gebouw)
+                    <tr>
+                        <td>{{$gebouw->name}}</td>
+                        <td>{{$gebouw->type}}</td>
+                        <td>{{$gebouw->value}}</td>
+                        <td><button onclick="document.location = '../../calculator/{{$gebouw->id}}/edit'" type="button" class="btn btn-outline-success btn-sm">Edit</button></td>
+                    </tr>
             @endforeach
+                </tbody>
         </table>
-    </div>
+        <div class="row level-item">
+            <th>{{ $gebouwen->links() }}</th>
+        </div>
 @endsection

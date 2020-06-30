@@ -1,7 +1,6 @@
 @extends('layout')
 
 @section('body')
-    <div class="section">
         <div class="columns is-centered">
             <div class="column is-two-fifths">
                 <div class="card has-background-danger has-text-white">
@@ -53,5 +52,4 @@
                 </form>
             </div>
         </div>
-    </div>
 @endsection

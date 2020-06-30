@@ -25,10 +25,10 @@
             @else
                     <div class="navbar-menu">
                         <div class="navbar-start">
-                            <a class="navbar-item" href="{{ route('welcome') }}">Home</a>
-                            <a class="navbar-item" href="{{ route('visualisatie') }}">Visualisatie</a>
-                            <a class="navbar-item" href="{{ route('overons') }}">Over ons</a>
-                            <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
+                            <a class="navbar-item" href="{{ route('calculator') }}">calculator</a>
+                            <a class="navbar-item" href="{{ route('calculator') }}">overzicht</a>
+                            <a class="navbar-item" href="{{ route('cms') }}">cms</a>
+                            <a class="navbar-item" href="{{ route('contact') }}">contact</a>
                         </div>
                     </div>
             @endguest
@@ -62,9 +62,9 @@
                 </div>
             </div>
         </nav>
-
+        <div class="section">
         @yield('body')
-
+        </div>
         {{-- <footer class="page-footer fixed-bottom font-small bg-dark text-white pt-4">
             <div class="container-fluid text-center text-md-left">
                 <div class="row">

@@ -15,8 +15,10 @@ class GebouwenController extends Controller
 
     public function index(){
         //render a list of the resource
+        $gebouwen = Gebouw::paginate(5);
+
         return view('calculator', [
-            'gebouwen' => Gebouw::all()
+            'gebouwen' => $gebouwen
         ]);
     }
 
@@ -146,7 +148,8 @@ class GebouwenController extends Controller
         for($i = 0; $i < count($ruimteArr); $i++){
             $ruimte = Gebouw::find($ruimteArr[$i]);
             $totalValue += $ruimte->value;
-            $saveString .= $ruimteArr[$i] . ';';
+            if($i == 0)$saveString .= $ruimteArr[$i];
+            else $saveString .= ';' . $ruimteArr[$i];
         }
 
         $gebouw = new Gebouw();
@@ -284,7 +287,32 @@ class GebouwenController extends Controller
     }
 
     public function updateGebouw($id){
+        request()->validate([
+            'naam' => 'required',
+            'ruimtes.*' => 'required'
+        ]);
 
+        $ruimteArr = request('ruimtes');
+
+        $totalValue = 0;
+        $saveString = "";
+
+        for($i = 0; $i< count($ruimteArr); $i++){
+            $ruimte = Gebouw::find($ruimteArr[$i]);
+            $totalValue += $ruimte->value;
+            if($i == 0)$saveString .= $ruimteArr[$i];
+            else $saveString .= ';' . $ruimteArr[$i];
+        }
+
+        $gebouw = Gebouw::find($id);
+        $gebouw->name = request('naam');
+        $gebouw->type = "gebouw";
+        $gebouw->value = round($totalValue, 3);
+        $gebouw->saveString = $saveString;
+
+        $gebouw->save();
+
+        return redirect('/calculator');
     }
 
     public function destroy(){

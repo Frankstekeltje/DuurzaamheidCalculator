@@ -27,7 +27,7 @@ Route::get('/visualisatie', function(){
     return view('visualisatie');
 })->name('visualisatie')->middleware('verified');
 
-Route::get('/calculator', 'GebouwenController@index');
+Route::get('/calculator', 'GebouwenController@index')->name('calculator');
 
 Route::get('/calculator/{type}', 'GebouwenController@create');
 
@@ -43,7 +43,7 @@ Route::get('/contact', 'ContactMessageController@create')->name('contact');
 
 Route::post('/contact', 'ContactMessageController@store')->name('contact.store');
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
+Route::get('/home', 'HomeController@index', 'GebouwenController@index')->name('home')->middleware('verified');
 
 Route::get('/cms', 'DatabaseController@index')->name('cms')->middleware('verified');
 

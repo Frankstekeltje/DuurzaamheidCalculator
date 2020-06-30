@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Material;
+use function PHPSTORM_META\type;
 
 class DatabaseController extends Controller
 {
@@ -11,9 +12,9 @@ class DatabaseController extends Controller
      */
     public function index()
     {
-        //
+        $materials = Material::orderBy('type')->paginate(15);
         return view('cms', [
-            'materials' => Material::orderBy('type')->get()
+            'materials' => $materials
         ]);
     }
 
