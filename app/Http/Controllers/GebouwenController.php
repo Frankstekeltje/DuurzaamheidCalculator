@@ -106,7 +106,7 @@ class GebouwenController extends Controller
         for($i = 0; $i < count($matArr); $i++){
             $material = Material::find($matArr[$i]);
             if($material->type == "glas" || $material->type == "Luchtspouw") $value += $material->value;
-            else $value += ($dikteArr[$i] / $material->value);
+            else $value += (($dikteArr[$i] / 1000) / $material->value);
         }
 
         $saveString = "";
@@ -134,7 +134,7 @@ class GebouwenController extends Controller
             'gebouwen.*' => 'required',
             'height.*' => 'required',
             'width.*' => 'required',
-            'tempIn.*' => 'required',
+            'tempIn' => 'required',
             'tempOut.*' => 'required'
             ]);
 
@@ -149,9 +149,9 @@ class GebouwenController extends Controller
 
         for($i = 0; $i < count($gebArr); $i++){
             $geb = Gebouw::find($gebArr[$i]);
-            $totalValue += (($tempIn[$i] - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
-            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
-            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
+            $totalValue += (($tempIn - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
+            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn . ':' . $tempOut[$i];
+            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn . ':' . $tempOut[$i];
         }
 
         $gebouw = new Gebouw();
@@ -219,8 +219,9 @@ class GebouwenController extends Controller
                     break;
                 case "ruimte":
                     return view('ruimteEdit', [
-                        'walls' => Gebouw::where('type', 'muur')
-                            ->get(),
+                        'walls' => Gebouw::where('type', 'buitenMuur')
+                                     ->orWhere('type', 'binnenMuur')
+                                     ->get(),
                         'ceilings' => Gebouw::where('type', 'plafond')
                             ->get(),
                         'floors' => Gebouw::where('type', 'vloer')
@@ -286,7 +287,7 @@ class GebouwenController extends Controller
             'gebouwen.*' => 'required',
             'height.*' => 'required',
             'width.*' => 'required',
-            'tempIn.*' => 'required',
+            'tempIn' => 'required',
             'tempOut.*' => 'required'
             ]);
 
@@ -301,9 +302,9 @@ class GebouwenController extends Controller
 
         for($i = 0; $i < count($gebArr); $i++){
             $geb = Gebouw::find($gebArr[$i]);
-            $totalValue += (($tempIn[$i] - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
-            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
-            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn[$i] . ':' . $tempOut[$i];
+            $totalValue += (($tempIn - $tempOut[$i]) * ($heightArr[$i] * $widthArr[$i]) * (1 / $geb->value));
+            if($i == 0) $saveString .= $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn . ':' . $tempOut[$i];
+            else $saveString .= ";" . $gebArr[$i] . ':' . $heightArr[$i] . ':' . $widthArr[$i] . ':' . $tempIn . ':' . $tempOut[$i];
         }
 
         $gebouw = Gebouw::find($id);
