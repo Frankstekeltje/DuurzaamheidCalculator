@@ -39,9 +39,9 @@ Route::post('/contact', 'ContactMessageController@store')->name('contact.store')
 
 Route::get('/home', 'HomeController@index', 'GebouwenController@index')->name('home')->middleware('verified');
 
-Route::get('/overzicht', 'GebouwenController@indexBuilding')->middleware('verified');
+Route::get('/overzicht', 'GebouwenController@indexBuilding')->middleware('verified')->name('overzicht');
 
-Route::get('/overzicht/{id}', 'GebouwenController@show');
+Route::get('/gebouwOverzicht/{id}', 'GebouwenController@show')->middleware('verified');
 
 Route::get('/cms', 'DatabaseController@index')->name('cms')->middleware('verified');
 
