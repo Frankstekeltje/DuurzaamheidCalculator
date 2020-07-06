@@ -3,7 +3,7 @@
 @section('body')
         <div class="columns is-centered">
             <div class="column is-two-fifths">
-                <div class="card has-background-danger has-text-white">
+                <div class="card has-text-white" style="background-color: hsl(102, 54%, 40%)">
                     <div class="card-content title has-text-white">Contact gegevens</div>
                     <div class="card-body">
                         <p class="card-title is-size-3">S-Boats</p>

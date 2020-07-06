@@ -9,7 +9,7 @@
         @yield('head')
     </head>
     <body class="has-navbar-fixed-top">
-        <nav class="navbar is-danger is-fixed-top" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-fixed-top is-success" role="navigation" aria-label="main navigation" style="background-color: hsl(102, 54%, 40%); text-decoration: none;">
             @guest
                 @if(Route::has('register'))
 
@@ -36,9 +36,9 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         @guest
-                            <a class="button is-danger is-light" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
+                            <a class="button is-success is-light" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
                             @if (Route::has('register'))
-                                <a class="button is-danger is-light" href="{{ route('register') }}">{{ __('Registreren') }}</a>
+                                <a class="button is-success is-light" href="{{ route('register') }}">{{ __('Registreren') }}</a>
                             @endif
                         @else
                             <li class="nav-item dropdown">
@@ -96,8 +96,8 @@
                         <div class="columns">
                             <div class="column is-one-third">
                                 <a href="../../calculator/muur" style="text-decoration: none;">
-                                    <article class="tile is-child notification is-danger has-text-centered">
-                                        <p class="title">Calculator</p>
+                                    <article class="tile is-child notification has-text-centered" style="background-color: hsl(102, 54%, 40%)">
+                                        <p class="title has-text-white">Calculator</p>
                                         <svg class="has-text-centered" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                              width="80" height="80"
                                              viewBox="0 0 172 172"
@@ -107,8 +107,8 @@
                             </div>
                             <div class="column is-one-third">
                                 <a href="/calculator" style="text-decoration: none;">
-                                    <article class="tile is-child notification is-danger has-text-centered">
-                                        <p class="title">Edit</p>
+                                    <article class="tile is-child notification has-text-centered" style="background-color: hsl(102, 54%, 40%)">
+                                        <p class="title has-text-white">Edit</p>
                                         <svg class="has-text-centered" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                              width="80" height="80"
                                              viewBox="0 0 172 172"
@@ -118,8 +118,8 @@
                             </div>
                             <div class="column is-one-third">
                                 <a href="/overzicht" style="text-decoration: none;">
-                                    <article class="tile is-child notification is-danger has-text-centered">
-                                        <p class="title">Overzicht</p>
+                                    <article class="tile is-child notification has-text-centered" style="background-color: hsl(102, 54%, 40%)">
+                                        <p class="title has-text-white">Overzicht</p>
                                         <svg class="has-text-centered" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                              width="80" height="80"
                                              viewBox="0 0 172 172"

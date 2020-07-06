@@ -45,11 +45,11 @@
         $priceYear = $qYear * 0.14;
     @endphp
 
-    <div class="card has-background-danger has-text-white">
+    <div class="card has-text-white" style="background-color: hsl(102, 54%, 40%)">
         <div class="card-content title has-text-white">{{ $ruimte->name }}</div>
         <div class="card-body">
             <p class="card-title is-size-3">Informatie</p>
-            <table class="table is-bordered is-striped is-narrow has-background-danger has-text-white">
+            <table class="table is-bordered is-striped is-narrow has-text-white" style="background-color: hsl(102, 54%, 40%)">
                 <thead>
                 <tr>
                     <th class="has-text-white">Naam</th>
