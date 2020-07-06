@@ -4,7 +4,7 @@
    @foreach ($gebouwen as $gebouw)
     @if($gebouw->type == 'gebouw')
             <div class="column">
-                    <div class="card has-background-danger has-text-white">
+                    <div class="card has-text-white" style="background-color: hsl(102, 54%, 40%)">
                         <header class="card-header">
                             <p class="card-header-title has-text-white">
                                 {{$gebouw->name}}

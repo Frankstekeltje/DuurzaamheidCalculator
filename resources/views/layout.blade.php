@@ -9,7 +9,7 @@
         @yield('head')
     </head>
     <body class="has-navbar-fixed-top">
-        <nav class="navbar is-danger is-fixed-top" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-success is-fixed-top" role="navigation" aria-label="main navigation" style="background-color: hsl(102, 54%, 40%)">
             @guest
             @if(Route::has('register'))
 
@@ -36,9 +36,9 @@
                 <div class="navbar-item">
                     <div class="buttons">
                         @guest
-                                <a class="button is-danger is-light" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
+                                <a class="button is-success is-light" href="{{ route('login') }}">{{ __('Inloggen') }}</a>
                             @if (Route::has('register'))
-                                <a class="button is-danger is-light" href="{{ route('register') }}">{{ __('Registreren') }}</a>
+                                <a class="button is-success is-light" href="{{ route('register') }}">{{ __('Registreren') }}</a>
                             @endif
                         @else
                             <li class="nav-item dropdown">
