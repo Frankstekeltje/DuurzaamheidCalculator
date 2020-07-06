@@ -60,8 +60,8 @@
                             @endforeach
                         </select>
                         <br>
-                        <input value="{{$height}}" placeholder="Hoogte in mm" class="wall{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input value="{{$width}}" placeholder="Breedte in mm" class="wall{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input value="{{$height}}" placeholder="Hoogte in m" class="wall{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input value="{{$width}}" placeholder="Breedte in m" class="wall{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input value="{{$tempOut}}" placeholder="Temperatuur buiten de kamer" class="wall{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>
@@ -81,8 +81,8 @@
                             @endforeach
                         </select>
                         <br>
-                        <input value="{{$height}}" placeholder="Hoogte in mm" class="ceiling{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input value="{{$width}}" placeholder="Breedte in mm" class="ceiling{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input value="{{$height}}" placeholder="Hoogte in m" class="ceiling{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input value="{{$width}}" placeholder="Breedte in m" class="ceiling{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input value="{{$tempOut}}" class="ceiling{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>
@@ -102,8 +102,8 @@
                             @endforeach
                         </select>
                         <br>
-                        <input value="{{$height}}" placeholder="lengte in mm" class="floor{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input value="{{$width}}" placeholder="Breedte in mm" class="floor{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input value="{{$height}}" placeholder="lengte in m" class="floor{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input value="{{$width}}" placeholder="Breedte in m" class="floor{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input value="{{$tempOut}}" class="ceiling{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>

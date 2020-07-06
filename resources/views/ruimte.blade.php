@@ -59,8 +59,8 @@
                         </select>
                         <button onclick="removeSelect('wall{{$i}}')" id="wall{{$i}}" type="button" class="btn btn-outline-danger btn-sm wall{{$i}}">X</button>
                         <br>
-                        <input placeholder="Hoogte in mm" class="wall{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input placeholder="Breedte in mm" class="wall{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input placeholder="Hoogte in m" class="wall{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input placeholder="Breedte in m" class="wall{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input placeholder="Temperatuur buiten de kamer" class="wall{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>
@@ -78,8 +78,8 @@
                         </select>
                         <button onclick="removeSelect('ceiling{{$i}}')" id="ceiling{{$i}}" type="button" class="btn btn-outline-danger btn-sm ceiling{{$i}}">X</button>
                         <br>
-                        <input placeholder="Hoogte in mm" class="ceiling{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input placeholder="Breedte in mm" class="ceiling{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input placeholder="Hoogte in m" class="ceiling{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input placeholder="Breedte in m" class="ceiling{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input value="-7" class="ceiling{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>
@@ -97,8 +97,8 @@
                         </select>
                         <button onclick="removeSelect('floor{{$i}}')" id="floor{{$i}}" type="button" class="btn btn-outline-danger btn-sm floor{{$i}}">X</button>
                         <br>
-                        <input placeholder="lengte in mm" class="floor{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
-                        <input placeholder="Breedte in mm" class="floor{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
+                        <input placeholder="lengte in m" class="floor{{$i}}" type="text" name="height[]" onkeypress="return isNumber(event)">
+                        <input placeholder="Breedte in m" class="floor{{$i}}" type="text" name="width[]" onkeypress="return isNumber(event)">
                         <br>
                         <input value="5" class="ceiling{{$i}}" type="text" name="tempOut[]" onkeypress="return isNumber(event)">
                         <br>

@@ -40,7 +40,7 @@
 
         }
         $rAverage = $topLine / $bottomLine;
-        $volLast = 2250 - ((200 / 1.5) * $rAverage);
+        $volLast = 2250 - (200 / 1.5) * $rAverage;
         $qYear = $gebouw->value * $volLast;
         $priceYear = $qYear * 0.14;
     @endphp
